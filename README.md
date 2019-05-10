@@ -14,13 +14,13 @@ unique customers.
 
 ## Setup/Installation Requirements
 
-| Behavior              | Input/Action                                                                                                  | Expected Result                                                           |
-|-----------------------|---------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Create New Stylist    | /hairsalon/newstylist </br>  Stylist Name: "Frank" (userInput)</br> Create Stylist(button) => (on-click)</br> |   /hairsalon/stylist/1.   "Frank"                                         |
-|  View All Stylists    |   /hairsalon.   See All Stylists(button) => (on-click)                                                        |   /hairsalon/stylist/index.   "Frank".   "Steph".   "Ed"                  |
-| View Specific Stylist |   hairsalon/index.   "Frank"(index link) => (on-click)                                                        |   /hairsalon/stylist/1.   "Name: Frank".   "Customers:"   ...   ...   ... |
-| Create New Customer   |   ..stylist/1/newcustomer.   New Customer Name: "Teddy".   Create Customer(button) => (on-click)              |   /hairsalon/stylist/1/customer/1.   "Name: Teddy".   "Stylist: Frank"    |
-| View All Customers    |    /hairsalon.   View All Customers(button) => (onclick)                                                      |   /hairsalon/customer/index.   "Teddy".   "Jennifer".   "Veronica"        |
+| Behavior              | Input/Action                                                                                                  | Expected Result                                                         |
+|-----------------------|---------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| Create New Stylist    | /hairsalon/newstylist </br>  Stylist Name: "Frank" (userInput)</br> Create Stylist(button) => (on-click)</br> | /hairsalon/stylist/1</br> "Frank"                                       |
+|  View All Stylists    | /hairsalon</br> See All Stylists(button) => (on-click)                                                        | /hairsalon/stylist/index</br> "Frank"</br> "Steph"</br> "Ed"            |
+| View Specific Stylist | /hairsalon/index</br> "Frank"(index link) => (on-click)                                                       | /hairsalon/stylist/1</br> "Name: Frank"</br> "Customers:"</br> ...</br> |
+| Create New Customer   | /hairsalon/stylist/1/newcustomer</br> New Customer Name: "Teddy"</br> Create Customer(button) => (on-click)   | /hairsalon/stylist/1/customer/1</br> "Name: Teddy"</br>"Stylist: Frank" |
+| View All Customers    | /hairsalon</br> View All Customers(button) => (onclick)                                                       | /hairsalon/customer/index</br> "Teddy"</br> "Jennifer"</br>"Veronica"   |
 
 ## Application Specifications
 
