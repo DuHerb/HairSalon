@@ -14,6 +14,14 @@ unique customers.
 
 ## Setup/Installation Requirements
 
+1.  download HairSalon.Solution into your local environment
+2.  In mysql: CREATE DATABASE dustin_herboldshimer
+3.  In phpmyadmin: import dustin_herboldshimer.sql (located in HairSalon.Solultion/DBbackups)
+4.  In terminal: HairSalon.Solution$ cd HairSalon; dotnet restore; dotnet run
+5.  View/Use app in browser at localhost:5000
+
+## Application Specifications
+
 | Behavior              | Input/Action                                                                                                  | Expected Result                                                         |
 |-----------------------|---------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
 | Create New Stylist    | /hairsalon/newstylist </br>  Stylist Name: "Frank" (userInput)</br> Create Stylist(button) => (on-click)</br> | /hairsalon/stylist/1</br> "Frank"                                       |
@@ -21,8 +29,6 @@ unique customers.
 | View Specific Stylist | /hairsalon/index</br> "Frank"(index link) => (on-click)                                                       | /hairsalon/stylist/1</br> "Name: Frank"</br> "Customers:"</br> ...</br> |
 | Create New Customer   | /hairsalon/stylist/1/newcustomer</br> New Customer Name: "Teddy"</br> Create Customer(button) => (on-click)   | /hairsalon/stylist/1/customer/1</br> "Name: Teddy"</br>"Stylist: Frank" |
 | View All Customers    | /hairsalon</br> View All Customers(button) => (onclick)                                                       | /hairsalon/customer/index</br> "Teddy"</br> "Jennifer"</br>"Veronica"   |
-
-## Application Specifications
 
 ## Support and contact details
 
