@@ -16,11 +16,21 @@ unique customers.
 
 | Behavior              | Input/Action                                                                                 | Expected Result                                                 |
 |-----------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
-| Create New Stylist    | /hairsalon/newstylist Stylist Name: "Frank" (userInput) Create Stylist(button) => (on-click) |  /hairsalon/stylist/1 "Frank"                                   |
-|  View All Stylists    |  /hairsalon  See All Stylists(button) => (on-click)                                          |  /hairsalon/stylist/index "Frank" "Steph" "Ed"                  |
-| View Specific Stylist |  hairsalon/index  "Frank"(index link) => (on-click)                                          |  /hairsalon/stylist/1 "Name: Frank" "Customers:" ... ... ...    |
-| Create New Customer   |  ..stylist/1/newcustomer New Customer Name: "Teddy" Create Customer(button) => (on-click)    |  /hairsalon/stylist/1/customer/1 "Name: Teddy" "Stylist: Frank" |
-| View All Customers    |   /hairsalon View All Customers(button) => (onclick)                                         |  /hairsalon/customer/index "Teddy" "Jennifer" "Veronica"        |
+| Create New Stylist    | /hairsalon/newstylist  
+Stylist Name: "Frank" (userInput) Create Stylist(button) => (on-click) |  /hairsalon/stylist/1  
+"Frank"                                   |
+|  View All Stylists    |  /hairsalon  
+See All Stylists(button) => (on-click)                                          |  /hairsalon/stylist/index  
+"Frank" "Steph" "Ed"                  |
+| View Specific Stylist |  hairsalon/index  
+"Frank"(index link) => (on-click)                                          |  /hairsalon/stylist/1  
+"Name: Frank" "Customers:" ... ... ...    |
+| Create New Customer   |  ..stylist/1/newcustomer  
+New Customer Name: "Teddy" Create Customer(button) => (on-click)    |  /hairsalon/stylist/1/customer/1  
+"Name: Teddy" "Stylist: Frank" |
+| View All Customers    |   /hairsalon  
+View All Customers(button) => (onclick)                                         |  /hairsalon/customer/index  
+"Teddy" "Jennifer" "Veronica"        |
 
 ## Application Specifications
 
