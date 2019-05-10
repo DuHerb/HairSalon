@@ -5,7 +5,7 @@ using HairSalon;
 namespace HairSalon.Models
 {
 
-    public partial class DB
+    public class DB
     {
         public static MySqlConnection Connection()
         {
@@ -13,7 +13,7 @@ namespace HairSalon.Models
             return conn;
         }
 
-        public static void CloseDB(MySqlConnection conn)
+        public static void Close(MySqlConnection conn)
         {
             conn.Close();
             if(conn != null)
