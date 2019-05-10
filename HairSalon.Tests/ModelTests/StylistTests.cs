@@ -34,7 +34,7 @@ namespace HairSalon.TestTools
         public void GetPropertyFirstName_ReturnsFirstName_String()
         {
             string firstName = "Mike";
-            Stylist newStylist = new Stylist(1, "Mike");
+            Stylist newStylist = new Stylist("Mike");
 
             string result = newStylist.FirstName;
             Assert.AreEqual(firstName, result);
@@ -44,7 +44,7 @@ namespace HairSalon.TestTools
         public void GetPropertyLastName_ReturnsLastName_String()
         {
             string lastName = "beard";
-            Stylist newStylist = new Stylist(1, "mike", "beard");
+            Stylist newStylist = new Stylist("mike", "beard");
 
             string result = newStylist.LastName;
             Assert.AreEqual(lastName, result);
@@ -54,8 +54,8 @@ namespace HairSalon.TestTools
         public void GetPropertyId_ReturnsId_Int()
         {
             int id = 1;
-            Stylist newStylist = new Stylist(id, "mike", "beard");
-
+            Stylist newStylist = new Stylist("mike", "beard");
+            newStylist.Id = id;
             int result = newStylist.Id;
             Assert.AreEqual(id, result);
         }
@@ -65,16 +65,19 @@ namespace HairSalon.TestTools
         public void GetAll_ReturnsAllStylistsFromDataBase_List()
         {
             List<Stylist> stylists = new List<Stylist>{};
-            // Stylist newStylist = new Stylist();
-            // string result = newStylist.FirstName;
-            // string expected = "default";
             List<Stylist> result = Stylist.GetAll();
             CollectionAssert.AreEqual(stylists, result);
         }
-        // // [TestMethod]
-        // public void Save_SavesStylistToDatabase_Stylist()
-        // {
-
-        // }
+        // [TestMethod]
+        public void Save_SavesStylistToDatabase_Stylist()
+        {
+            string firstName = "mike";
+            string lastName = "beard";
+            Stylist testStylist = new Stylist();
+            testStylist.Save(firstName, lastName);
+            List<Stylist> result = Stylist.GetAll();
+            List<Stylist> testList = new List<Stylist> {testStylist};
+            CollectionAssert.AreEqual(testList, result);
+        }
     }
 }

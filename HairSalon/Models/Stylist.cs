@@ -7,14 +7,12 @@ namespace HairSalon.Models
     {
         public string FirstName {get;set;}
         public string LastName {get;set;}
-        int _id;
-        public int Id {get=> _id; set=> _id = value;}
+        public int Id {get;set;}
 
-        public Stylist(int id = 0, string firstName = "default", string lastName = "default")
+        public Stylist(string firstName = "default", string lastName = "default")
         {
             FirstName = firstName;
             LastName = lastName;
-            _id = id;
         }
 
         public static void ClearAll()
@@ -47,9 +45,18 @@ namespace HairSalon.Models
             return stylists;
         }
 
-        public void Save()
+        public int Save(string firstName, string lastName)
         {
-
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO styles (first_name, last_Name) VALUES (@firstName, @lastName);";
+            MySqlParameter description = new MySqlParameter();
+            cmd.Parameters.AddWithValue("@firstName", firstName);
+            cmd.Parameters.AddWithValue("@lastName", lastName);
+            cmd.ExecuteNonQuery();
+            DB.Close(conn);
+            return (int) cmd.LastInsertedId;
         }
 
         public override bool Equals(System.Object otherItem)
