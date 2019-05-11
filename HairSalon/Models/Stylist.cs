@@ -15,7 +15,7 @@ namespace HairSalon.Models
             LastName = lastName;
         }
 
-        public static void ClearAll()
+        public static void ClearAllStylists()
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();

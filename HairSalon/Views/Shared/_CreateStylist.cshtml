@@ -26,7 +26,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Stylist" asp-action="Index">Stylists</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark new-stylist" asp-area="" asp-controller="Stylist" asp-action="New">Add New Stylist</a>
+                            <!-- <a class="nav-link text-dark new-stylist" asp-area="" asp-controller="Stylist" asp-action="New">Add New Stylist</a> -->
                         </li>
                     </ul>
                 </div>
@@ -36,6 +36,7 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            @ViewBag.stylistId
         </main>
     </div>
 

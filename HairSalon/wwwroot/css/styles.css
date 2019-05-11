@@ -17,3 +17,7 @@ img {
 .new-stylist {
     float: right;
 }
+
+.italic {
+    font-style: italic;
+}
