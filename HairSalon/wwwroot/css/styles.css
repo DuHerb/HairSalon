@@ -10,3 +10,7 @@ img {
 .main-actions button a {
     color: white;
 }
+
+.new-stylist {
+    float: right;
+}

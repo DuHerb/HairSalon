@@ -69,12 +69,12 @@ namespace HairSalon.TestTools
             CollectionAssert.AreEqual(stylists, result);
         }
         // [TestMethod]
-        public void Save_SavesStylistToDatabase_Stylist()
+        public void CreateStylist_SavesStylistToDatabase_Stylist()
         {
             string firstName = "mike";
             string lastName = "beard";
             Stylist testStylist = new Stylist();
-            testStylist.Save(firstName, lastName);
+            Stylist.CreateStylist(firstName, lastName);
             List<Stylist> result = Stylist.GetAll();
             List<Stylist> testList = new List<Stylist> {testStylist};
             CollectionAssert.AreEqual(testList, result);

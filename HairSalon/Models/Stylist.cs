@@ -19,7 +19,7 @@ namespace HairSalon.Models
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
-            var cmd = conn.CreateCommand() as MySqlCommand;
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"DELETE FROM stylists;";
             cmd.ExecuteNonQuery();
             DB.Close(conn);
@@ -45,7 +45,24 @@ namespace HairSalon.Models
             return stylists;
         }
 
-        public int Save(string firstName, string lastName)
+        public static Stylist GetStylist(int id)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM stylists WHERE id = @id";
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            rdr.Read();
+            Stylist foundStylist = new Stylist();
+            foundStylist.Id = rdr.GetInt32(0);
+            foundStylist.FirstName = rdr.GetString(1);
+            foundStylist.LastName = rdr.GetString(2);
+            DB.Close(conn);
+            return foundStylist;
+        }
+
+        public static int CreateStylist(string firstName, string lastName)
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
