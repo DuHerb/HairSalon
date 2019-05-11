@@ -67,7 +67,7 @@ namespace HairSalon.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO styles (first_name, last_Name) VALUES (@firstName, @lastName);";
+            cmd.CommandText = @"INSERT INTO stylists (first_name, last_Name) VALUES (@firstName, @lastName);";
             MySqlParameter description = new MySqlParameter();
             cmd.Parameters.AddWithValue("@firstName", firstName);
             cmd.Parameters.AddWithValue("@lastName", lastName);
@@ -90,9 +90,5 @@ namespace HairSalon.Models
             return (nameEquality && idEquality);
         }
         }
-
-
-
-
     }
 }
