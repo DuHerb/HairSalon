@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 10, 2019 at 11:32 AM
+-- Generation Time: May 12, 2019 at 12:04 AM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.26
 
@@ -17,10 +17,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Table structure for table `clients`
 --
 
-CREATE TABLE `customer` (
+CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
   `stylist_id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
@@ -44,9 +44,9 @@ CREATE TABLE `stylists` (
 --
 
 --
--- Indexes for table `customer`
+-- Indexes for table `clients`
 --
-ALTER TABLE `customer`
+ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -60,13 +60,13 @@ ALTER TABLE `stylists`
 --
 
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT for table `clients`
 --
-ALTER TABLE `customer`
+ALTER TABLE `clients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `stylists`
 --
 ALTER TABLE `stylists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
