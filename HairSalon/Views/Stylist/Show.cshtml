@@ -4,9 +4,12 @@
 }
 <div>
     <h3>@Model.FirstName @Model.LastName</h3>
-
     <p>Client List:</p>
-
-    <ul>
+    <ul class="client-list">
+    @foreach(Client client in @ViewBag.Clients)
+    {
+        <li><a asp-controller="client" asp-action="show" asp-route-clientId=@Html.Raw(@client.Id)>@client.FirstName @client.LastName</a></li>
+    }
     </ul>
+
 </div>

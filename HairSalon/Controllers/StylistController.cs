@@ -30,7 +30,10 @@ namespace HairSalon.Controllers
         [HttpGet("/stylist/show/{id}")]
         public IActionResult Show(int id)
         {
+            List<Client> clients = new List<Client>{};
+            clients = Client.GetAllByStylist(id);
             ViewBag.Id = id;
+            ViewBag.Clients = clients;
             return View(Stylist.GetStylist(id));
         }
     }
