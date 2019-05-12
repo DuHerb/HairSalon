@@ -1,6 +1,6 @@
 <!-- client/show.cshtml -->
 @{
-    Layout = "~/Views/Shared/_CreateCustomer.cshtml";
+    ViewData["Page"] = "Client Page";
 }
 <div>
     <h3>@Model.FirstName @Model.LastName</h3>
@@ -9,3 +9,12 @@
         <a asp-controller="stylist" asp-action="show" asp-route-id=@Html.Raw(ViewBag.Stylist.Id)>@ViewBag.Stylist.FirstName @ViewBag.Stylist.LastName</a>
     </p>
 </div>
+
+@section NavLink {
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Stylist" asp-action="Index">Stylists</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark new-stylist" asp-controller="Client" asp-action="Index">Clients</a>
+    </li>
+}

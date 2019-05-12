@@ -26,9 +26,6 @@ namespace HairSalon.Controllers
 
         public IActionResult New()
         {
-            // string linkString = "<a class='nav-link text-dark new-stylist' asp-controller='Client' asp-action='New' asp-route-id = '" + stylistId + "'>Add New Customer</a>";
-            // ViewBag.id = stylistId;
-
             return View();
         }
 

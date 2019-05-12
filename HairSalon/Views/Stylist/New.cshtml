@@ -1,8 +1,9 @@
 <!-- stylist/new.cshtml -->
 @{
     Layout = "_Layout";
+    ViewData["Page"] = "New Stylist";
 }
-<h1>Hair By Dustin</h1>
+
 <h2>Enter New Stylist Information:</h2>
 
 <form asp-controller="Stylist" asp-action="Create" method="post">
