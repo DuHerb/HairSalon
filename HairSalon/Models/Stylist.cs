@@ -79,17 +79,17 @@ namespace HairSalon.Models
 
         public override bool Equals(System.Object otherItem)
         {
-        if (!(otherItem is Stylist))
-        {
-            return false;
-        }
-        else
-        {
-            Stylist newStylist = (Stylist) otherItem;
-            bool nameEquality = (this.FirstName == newStylist.FirstName && this.LastName == newStylist.LastName);
-            bool idEquality = (this.Id == newStylist.Id);
-            return (nameEquality && idEquality);
-        }
+            if (!(otherItem is Stylist))
+            {
+                return false;
+            }
+            else
+            {
+                Stylist newStylist = (Stylist) otherItem;
+                bool nameEquality = (this.FirstName == newStylist.FirstName && this.LastName == newStylist.LastName);
+                bool idEquality = (this.Id == newStylist.Id);
+                return (nameEquality && idEquality);
+            }
         }
     }
 }
