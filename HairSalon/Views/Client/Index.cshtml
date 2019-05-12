@@ -1,0 +1,13 @@
+<!-- client/index.cshtml -->
+@{
+    Layout = "~/Views/Shared/_CreateStylist.cshtml";
+}
+
+<div >
+<h2>Clients:</h2>
+
+      @foreach(Client client in Model)
+      {
+        <p><a asp-controller="client" asp-action="show" asp-route-clientId="@client.Id">@client.FirstName @client.LastName</a></p>
+      }
+</div>

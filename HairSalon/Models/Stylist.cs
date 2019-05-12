@@ -58,6 +58,7 @@ namespace HairSalon.Models
             foundStylist.Id = rdr.GetInt32(0);
             foundStylist.FirstName = rdr.GetString(1);
             foundStylist.LastName = rdr.GetString(2);
+
             DB.Close(conn);
             return foundStylist;
         }

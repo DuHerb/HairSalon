@@ -40,8 +40,8 @@ namespace HairSalon.Models
             {
                 Client newClient = new Client(rdr.GetInt32(1));
                 newClient.Id = rdr.GetInt32(0);
-                newClient.FirstName = rdr.GetString(3);
-                newClient.LastName = rdr.GetString(4);
+                newClient.FirstName = rdr.GetString(2);
+                newClient.LastName = rdr.GetString(3);
                 clients.Add(newClient);
             }
             DB.Close(conn);

@@ -20,11 +20,10 @@ namespace HairSalon.Controllers
         public IActionResult Create(int stylistId, string firstName, string lastName)
         {
             // int stylistId = int.Parse(stylistId);
-            int id = Client.CreateClient(stylistId, firstName, lastName);
-            return RedirectToAction("Show", new {id=id});
+            int clientId = Client.CreateClient(stylistId, firstName, lastName);
+            return RedirectToAction("Show", new {clientId = clientId});
         }
 
-        // [HttpGet("/Client/New/{stylistId}")]
         public IActionResult New()
         {
             // string linkString = "<a class='nav-link text-dark new-stylist' asp-controller='Client' asp-action='New' asp-route-id = '" + stylistId + "'>Add New Customer</a>";
@@ -33,10 +32,12 @@ namespace HairSalon.Controllers
             return View();
         }
 
-        [HttpGet("/client/show/{id}")]
-        public IActionResult Show(int id)
+        [HttpGet("/client/show/{clientId}")]
+        public IActionResult Show(int clientId)
         {
-            return View(Client.GetClient(id));
+            Client client = Client.GetClient(clientId);
+            ViewBag.Stylist = Stylist.GetStylist(client.StylistId);
+            return View(client);
         }
     }
 }
