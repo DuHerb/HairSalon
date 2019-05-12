@@ -15,7 +15,7 @@ namespace HairSalon.Models
             LastName = lastName;
         }
 
-        public static void ClearAll()
+        public static void ClearAllStylists()
         {
             MySqlConnection conn = DB.Connection();
             conn.Open();
@@ -58,6 +58,7 @@ namespace HairSalon.Models
             foundStylist.Id = rdr.GetInt32(0);
             foundStylist.FirstName = rdr.GetString(1);
             foundStylist.LastName = rdr.GetString(2);
+
             DB.Close(conn);
             return foundStylist;
         }
@@ -67,7 +68,7 @@ namespace HairSalon.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO styles (first_name, last_Name) VALUES (@firstName, @lastName);";
+            cmd.CommandText = @"INSERT INTO stylists (first_name, last_Name) VALUES (@firstName, @lastName);";
             MySqlParameter description = new MySqlParameter();
             cmd.Parameters.AddWithValue("@firstName", firstName);
             cmd.Parameters.AddWithValue("@lastName", lastName);
@@ -90,9 +91,5 @@ namespace HairSalon.Models
             return (nameEquality && idEquality);
         }
         }
-
-
-
-
     }
 }

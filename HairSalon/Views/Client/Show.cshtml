@@ -1,0 +1,11 @@
+<!-- client/show.cshtml -->
+@{
+    Layout = "~/Views/Shared/_CreateCustomer.cshtml";
+}
+<div>
+    <h3>@Model.FirstName @Model.LastName</h3>
+
+    <p>Stylist:  
+        <a asp-controller="stylist" asp-action="show" asp-route-id=@Html.Raw(ViewBag.Stylist.Id)>@ViewBag.Stylist.FirstName @ViewBag.Stylist.LastName</a>
+    </p>
+</div>
