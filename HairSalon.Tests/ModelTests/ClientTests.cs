@@ -81,7 +81,6 @@ namespace HairSalon.TestTools
 
         //CreateStylist() is the 'save' method for client.  It returns
         //the primary id assigned to newClient.
-        //This test method also serves as test for GetClient()
         [TestMethod]
         public void CreateStylist_SavesStylistToDatabase_Stylist()
         {
@@ -93,6 +92,15 @@ namespace HairSalon.TestTools
             int result = Client.GetClient(testClient).Id;
             // List<Client> testList = new List<Client> {testClient};
             Assert.AreEqual(testClient, result);
+        }
+
+        public void GetClient_ReturnClientById_Client()
+        {
+            int newClientId = Client.CreateClient(1,"mike","beard");
+            Client expected = new Client(1,"mike","beard");
+            expected.Id = newClientId;
+            Client result = Client.GetClient(newClientId);
+            Assert.AreEqual(expected, result);
         }
     }
 }
