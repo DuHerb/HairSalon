@@ -19,7 +19,6 @@ namespace HairSalon.Controllers
         [HttpPost("/Client/New/{stylistId}")]
         public IActionResult Create(int stylistId, string firstName, string lastName)
         {
-            // int stylistId = int.Parse(stylistId);
             int clientId = Client.CreateClient(stylistId, firstName, lastName);
             return RedirectToAction("Show", new {clientId = clientId});
         }
