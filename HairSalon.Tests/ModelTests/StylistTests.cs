@@ -12,7 +12,7 @@ namespace HairSalon.TestTools
 
         public void Dispose()
         {
-            Stylist.ClearAll();
+            Stylist.ClearAllStylists();
         }
 
         //testclass constructor includes override address for test database
