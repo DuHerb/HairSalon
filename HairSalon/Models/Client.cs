@@ -18,6 +18,22 @@ namespace HairSalon.Models
             StylistId = stylistId;
         }
 
+
+        public override bool Equals(System.Object otherItem)
+        {
+            if (!(otherItem is Client))
+            {
+                return false;
+            }
+            else
+            {
+                Client newClient = (Client) otherItem;
+                bool nameEquality = (this.FirstName == newClient.FirstName && this.LastName == newClient.LastName);
+                bool idEquality = (this.Id == newClient.Id && this.StylistId == newClient.StylistId);
+                return (nameEquality && idEquality);
+            }
+        }
+
         public static void ClearAllClients()
         {
             MySqlConnection conn = DB.Connection();
@@ -101,19 +117,26 @@ namespace HairSalon.Models
             return (int) cmd.LastInsertedId;
         }
 
-        public override bool Equals(System.Object otherItem)
+        public void DeleteClient()
         {
-            if (!(otherItem is Client))
-            {
-                return false;
-            }
-            else
-            {
-                Client newClient = (Client) otherItem;
-                bool nameEquality = (this.FirstName == newClient.FirstName && this.LastName == newClient.LastName);
-                bool idEquality = (this.Id == newClient.Id && this.StylistId == newClient.StylistId);
-                return (nameEquality && idEquality);
-            }
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM clients WHERE Id = @clientId;";
+            cmd.Parameters.AddWithValue("@clientId", Id);
+            cmd.ExecuteNonQuery();
+            DB.Close(conn);
+        }
+
+        public void ResetStylistId()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE clients SET stylist_id = 0 WHERE Id = @clientId;";
+            cmd.Parameters.AddWithValue("@clientId", Id);
+            cmd.ExecuteNonQuery();
+            DB.Close(conn);
         }
     }
 }

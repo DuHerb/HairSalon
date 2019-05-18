@@ -102,5 +102,25 @@ namespace HairSalon.TestTools
             Client result = Client.GetClient(newClientId);
             Assert.AreEqual(expected, result);
         }
+
+        public void DeleteClient_RemoveClientFromDB_List()
+        {
+            int newClientId = Client.CreateClient(1, "dummy", "client");
+            List<Client> expected = new List<Client> {};
+
+            Client client = Client.GetClient(newClientId);
+            client.DeleteClient();
+
+            CollectionAssert.AreEqual(expected, Client.GetAll());
+        }
+
+        public void ResetStylistId_SetClientStylistIdTo0_Int()
+        {
+            int newClientId = Client.CreateClient(1, "dummy", "client");
+            Client newClient = Client.GetClient(newClientId);
+            newClient.ResetStylistId();
+
+            Assert.AreEqual(0, newClient.Id);
+        }
     }
 }
