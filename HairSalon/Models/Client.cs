@@ -133,8 +133,19 @@ namespace HairSalon.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"UPDATE clients SET stylist_id = 0 WHERE Id = @clientId;";
-            cmd.Parameters.AddWithValue("@clientId", Id);
+            cmd.CommandText = @"UPDATE clients SET stylist_id = 0 WHERE id = @clientId;";
+            cmd.Parameters.AddWithValue("@clientId", this.Id);
+            cmd.ExecuteNonQuery();
+            DB.Close(conn);
+        }
+
+        public static void ResetAllByStylistId(int stylistId)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE clients SET stylist_id = 0 WHERE stylist_id = @stylistId;";
+            cmd.Parameters.AddWithValue("@stylistId", stylistId);
             cmd.ExecuteNonQuery();
             DB.Close(conn);
         }

@@ -94,6 +94,7 @@ namespace HairSalon.TestTools
             Assert.AreEqual(testClient, result);
         }
 
+        [TestMethod]
         public void GetClient_ReturnClientById_Client()
         {
             int newClientId = Client.CreateClient(1,"mike","beard");
@@ -103,6 +104,7 @@ namespace HairSalon.TestTools
             Assert.AreEqual(expected, result);
         }
 
+        [TestMethod]
         public void DeleteClient_RemoveClientFromDB_List()
         {
             int newClientId = Client.CreateClient(1, "dummy", "client");
@@ -114,13 +116,26 @@ namespace HairSalon.TestTools
             CollectionAssert.AreEqual(expected, Client.GetAll());
         }
 
+        [TestMethod]
         public void ResetStylistId_SetClientStylistIdTo0_Int()
         {
-            int newClientId = Client.CreateClient(1, "dummy", "client");
+            int newClientId = Client.CreateClient(2, "dummy", "client");
+            Client.GetClient(newClientId).ResetStylistId();
             Client newClient = Client.GetClient(newClientId);
-            newClient.ResetStylistId();
 
-            Assert.AreEqual(0, newClient.Id);
+            Assert.AreEqual(0, newClient.StylistId);
+        }
+
+        [TestMethod]
+        public void ResetAllByStylistId_ResetAllClientStylistIdsTo0_List()
+        {
+            int newClientId1 = Client.CreateClient(1,"dummy","client1");
+            int newClientId2 = Client.CreateClient(1,"dummy","client2");
+            Client.ResetAllByStylistId(1);
+            List<int> expected = new List<int> {0,0};
+            List<int> result = new List<int> { Client.GetClient(newClientId1).StylistId, Client.GetClient(newClientId2).StylistId};
+
+            CollectionAssert.AreEqual(expected, result);
         }
     }
 }
