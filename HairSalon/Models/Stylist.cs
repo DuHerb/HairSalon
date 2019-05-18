@@ -15,6 +15,21 @@ namespace HairSalon.Models
             LastName = lastName;
         }
 
+       public override bool Equals(System.Object otherItem)
+        {
+            if (!(otherItem is Stylist))
+            {
+                return false;
+            }
+            else
+            {
+                Stylist newStylist = (Stylist) otherItem;
+                bool nameEquality = (this.FirstName == newStylist.FirstName && this.LastName == newStylist.LastName);
+                bool idEquality = (this.Id == newStylist.Id);
+                return (nameEquality && idEquality);
+            }
+        }
+
         public static void ClearAllStylists()
         {
             MySqlConnection conn = DB.Connection();
@@ -77,19 +92,16 @@ namespace HairSalon.Models
             return (int) cmd.LastInsertedId;
         }
 
-        public override bool Equals(System.Object otherItem)
+        public void DeleteStylist()
         {
-            if (!(otherItem is Stylist))
-            {
-                return false;
-            }
-            else
-            {
-                Stylist newStylist = (Stylist) otherItem;
-                bool nameEquality = (this.FirstName == newStylist.FirstName && this.LastName == newStylist.LastName);
-                bool idEquality = (this.Id == newStylist.Id);
-                return (nameEquality && idEquality);
-            }
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM stylists WHERE id = @stylistId;";
+            MySqlParameter description = new MySqlParameter();
+            cmd.Parameters.AddWithValue("@stylistId", this.Id);
+            cmd.ExecuteNonQuery();
+            DB.Close(conn);
         }
     }
 }
