@@ -8,14 +8,16 @@ namespace HairSalon.Models
         public string FirstName {get;set;}
         public string LastName {get;set;}
         public int Id {get;set;}
+        public string Phone {get;set;}
 
         public int StylistId {get;set;}
 
-        public Client( int stylistId, string firstName = "default", string lastName = "default")
+        public Client( int stylistId, string firstName = "default", string lastName = "default", string phoneNumber = "none")
         {
             FirstName = firstName;
             LastName = lastName;
             StylistId = stylistId;
+            Phone = phoneNumber;
         }
 
 
@@ -98,6 +100,7 @@ namespace HairSalon.Models
             foundClient.Id = rdr.GetInt32(0);
             foundClient.FirstName = rdr.GetString(2);
             foundClient.LastName = rdr.GetString(3);
+            foundClient.Phone = rdr.GetString(4);
             DB.Close(conn);
             return foundClient;
         }
@@ -146,6 +149,20 @@ namespace HairSalon.Models
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"UPDATE clients SET stylist_id = 0 WHERE stylist_id = @stylistId;";
             cmd.Parameters.AddWithValue("@stylistId", stylistId);
+            cmd.ExecuteNonQuery();
+            DB.Close(conn);
+        }
+
+        public void EditClientInfo(string firstName, string lastName, string phoneNumber)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE clients SET first_name = @firstName, last_name = @lastName, phone = @phoneNumber WHERE id = @clientId;";
+            cmd.Parameters.AddWithValue("@clientId", Id);
+            cmd.Parameters.AddWithValue("@firstName", firstName);
+            cmd.Parameters.AddWithValue("@lastName", lastName);
+            cmd.Parameters.AddWithValue("@phoneNumber", phoneNumber);
             cmd.ExecuteNonQuery();
             DB.Close(conn);
         }

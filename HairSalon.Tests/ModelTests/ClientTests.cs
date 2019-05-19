@@ -137,5 +137,18 @@ namespace HairSalon.TestTools
 
             CollectionAssert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void EditClientInfo_UpdateClientInfo_String()
+        {
+            int newClientId = Client.CreateClient(1,"dummy","client1");
+            string firstName = "pam";
+            string lastName = "whiskers";
+            string phoneNumber = "5551239876";
+            Client.GetClient(newClientId).EditClientInfo(firstName, lastName, phoneNumber);
+            string expected = firstName + lastName + phoneNumber;
+            string result = Client.GetClient(newClientId).FirstName + Client.GetClient(newClientId).LastName + Client.GetClient(newClientId).Phone;
+            Assert.AreEqual(expected, result);
+        }
     }
 }

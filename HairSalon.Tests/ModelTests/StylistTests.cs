@@ -88,7 +88,18 @@ namespace HairSalon.TestTools
             Stylist.GetStylist(newStylistId).DeleteStylist();
             List<Stylist> result = Stylist.GetAll();
             CollectionAssert.AreEqual(expected, result);
+        }
 
+        [TestMethod]
+        public void EditName_ChangeStylistsName_Void()
+        {
+            int newStylistId = Stylist.CreateStylist("mike","beard");
+            string newFirstName = "pam";
+            string newLastName = "whiskers";
+            Stylist.GetStylist(newStylistId).EditName(newFirstName, newLastName);
+            string expected = newFirstName + newLastName;
+            string result = Stylist.GetStylist(newStylistId).FirstName + Stylist.GetStylist(newStylistId).LastName;
+            Assert.AreEqual(expected,result);
         }
     }
 }

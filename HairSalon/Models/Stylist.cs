@@ -102,6 +102,21 @@ namespace HairSalon.Models
             cmd.Parameters.AddWithValue("@stylistId", this.Id);
             cmd.ExecuteNonQuery();
             DB.Close(conn);
+            Client.ResetAllByStylistId(this.Id);
+        }
+
+        public void EditName(string firstName, string lastName)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE stylists SET first_name = @firstName, last_name = @lastName WHERE id = @stylistId;";
+            MySqlParameter description = new MySqlParameter();
+            cmd.Parameters.AddWithValue("@stylistId", Id);
+            cmd.Parameters.AddWithValue("@firstName", firstName);
+            cmd.Parameters.AddWithValue("@lastName", lastName);
+            cmd.ExecuteNonQuery();
+            DB.Close(conn);
         }
     }
 }
