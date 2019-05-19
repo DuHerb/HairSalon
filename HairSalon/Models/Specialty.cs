@@ -55,7 +55,7 @@ namespace HairSalon.Models
             return specialties;
         }
 
-            public static List<Specialty> GetAllByStylist(int stylistId)
+        public static List<Specialty> GetAllByStylist(int stylistId)
         {
             List<Specialty> specialties = new List<Specialty>{};
             MySqlConnection conn = DB.Connection();
