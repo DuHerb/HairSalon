@@ -5,10 +5,13 @@
 <div>
     <div class="clientHead">
     <h3>@Model.FirstName @Model.LastName</h3>
-    <form asp-controller="stylist" asp-action="destroy">
-        <input type="hidden" name="stylistId" value= @Model.Id>
-        <button type="submit">Delete Stylist</button>
-    </form>
+    <div class="editButtons">
+        <form asp-controller="stylist" asp-action="destroy">
+            <input type="hidden" name="stylistId" value= @Model.Id>
+            <button class="btn btn-dark" type="submit">Delete Stylist</button>
+        </form>
+        <a class="btn btn-dark" href="/stylist/show/@Model.Id/edit">Edit Stylist</a>
+    </div>
     </div>
 
     @if(ViewBag.Clients.Count != 0)

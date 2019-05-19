@@ -37,6 +37,19 @@ namespace HairSalon.Controllers
             return View(Stylist.GetStylist(id));
         }
 
+        [HttpGet("/stylist/show/{id}/edit")]
+        public IActionResult Edit(int id)
+        {
+            Stylist stylist = Stylist.GetStylist(id);
+            return View(stylist);
+        }
+
+        public IActionResult Update(string firstName, string lastName, int id)
+        {
+            Stylist.GetStylist(id).EditName(firstName, lastName);
+            return RedirectToAction("Show", new {id = id});
+        }
+
         public IActionResult Destroy(int stylistId)
         {
             Stylist.GetStylist(stylistId).DeleteStylist();

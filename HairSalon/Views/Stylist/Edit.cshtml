@@ -1,0 +1,19 @@
+<!-- stylist/edit.cshtml -->
+@{
+    ViewData["Page"] = "Edit Stylist";
+}
+
+<h2>Edit Stylist Information:</h2>
+
+<form asp-controller="Stylist" asp-action="Update" method="post">
+    <input type="hidden" name="id" value=@Model.Id>
+  <div class="">
+    <label for="firstName">First Name</label>
+    <input type="text" name="firstName" value=@Model.FirstName>
+  </div>
+  <div class="">
+    <label for="lastName">Last Name</label>
+    <input type="text" name="lastName" value=@Model.LastName>
+  </div>
+  <button type="submit">Update Stylist</button>
+</form>
