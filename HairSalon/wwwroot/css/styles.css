@@ -5,12 +5,16 @@ img {
     width: 200px;
 }
 
+input {
+    background: lightgray;
+}
+
 .client-list {
     padding-left: 0;
     list-style: none;
 }
 
-.clientHead {
+.pageHead {
     display: flex;
     justify-content: space-between;
 }
@@ -21,6 +25,10 @@ img {
 
 .editButtons .btn {
     margin: 5px;
+}
+
+.editButtons a {
+    height: fit-content;
 }
 
 .main-actions {

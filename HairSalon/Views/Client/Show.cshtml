@@ -3,12 +3,18 @@
     ViewData["Page"] = "Client Page";
 }
 <div>
-    <div class="clientHead">
-    <h3>@Model.FirstName @Model.LastName</h3>
-    <form asp-controller="client" asp-action="destroy">
-        <input type="hidden" name="clientId" value= @Model.Id>
-        <button type="submit">Delete Client</button>
-    </form>
+    <div class="pageHead">
+        <div class="pageHead-name">
+            <h3>@Model.FirstName @Model.LastName</h3>
+            <p>Phone: @Model.Phone</p>
+        </div>
+        <div class="editButtons">
+            <a class="btn btn-dark" href="/client/show/@Model.Id/edit">Edit Client</a>
+            <form asp-controller="client" asp-action="destroy">
+                <input type="hidden" name="clientId" value= @Model.Id>
+                <button class="btn btn-danger" type="submit">Delete Client</button>
+            </form>
+        </div>
     </div>
 
     <p>Stylist:

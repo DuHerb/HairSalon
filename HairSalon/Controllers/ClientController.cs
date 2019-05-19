@@ -60,5 +60,18 @@ namespace HairSalon.Controllers
             Client.GetClient(clientId).UpdateStylistId(stylistId);
             return RedirectToAction("Show", new {clientId = clientId});
         }
+
+        [HttpGet("/client/show/{id}/edit")]
+        public IActionResult Edit(int id)
+        {
+            Client client = Client.GetClient(id);
+            return View(client);
+        }
+
+        public IActionResult Update(string firstName, string lastName, string phone, int clientId)
+        {
+            Client.GetClient(clientId).EditClientInfo(firstName, lastName, phone);
+            return RedirectToAction("Show", new{clientId = clientId});
+        }
     }
 }

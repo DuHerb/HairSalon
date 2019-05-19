@@ -3,15 +3,15 @@
     ViewData["Page"] = @Model.FirstName + "'s Page";
 }
 <div>
-    <div class="clientHead">
-    <h3>@Model.FirstName @Model.LastName</h3>
-    <div class="editButtons">
-        <form asp-controller="stylist" asp-action="destroy">
-            <input type="hidden" name="stylistId" value= @Model.Id>
-            <button class="btn btn-dark" type="submit">Delete Stylist</button>
-        </form>
-        <a class="btn btn-dark" href="/stylist/show/@Model.Id/edit">Edit Stylist</a>
-    </div>
+    <div class="pageHead">
+        <h3>@Model.FirstName @Model.LastName</h3>
+        <div class="editButtons">
+            <a class="btn btn-dark" href="/stylist/show/@Model.Id/edit">Edit Stylist</a>
+            <form asp-controller="stylist" asp-action="destroy">
+                <input type="hidden" name="stylistId" value= @Model.Id>
+                <button class="btn btn-danger" type="submit">Delete Stylist</button>
+            </form>
+        </div>
     </div>
 
     @if(ViewBag.Clients.Count != 0)
@@ -28,7 +28,6 @@
     {
         <p>This stylist currently has no clients</p>
     }
-
 </div>
 
 @section NavLink {
