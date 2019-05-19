@@ -57,15 +57,22 @@ namespace HairSalon.TestTools
             Assert.AreEqual(newSpeciatlyId, result);
         }
 
-        // [TestMethod]
-        // public void GetClient_ReturnClientById_Client()
-        // {
-        //     int newClientId = Client.CreateClient(1,"mike","beard");
-        //     Client expected = new Client(1,"mike","beard");
-        //     expected.Id = newClientId;
-        //     Client result = Client.GetClient(newClientId);
-        //     Assert.AreEqual(expected, result);
-        // }
+        [TestMethod]
+        public void GetSpecialty_ReturnSpecialtyById_Specialty()
+        {
+            int newSpecialtyId = Specialty.CreateSpecialty("test");
+            Specialty expected = new Specialty("test");
+            expected.Id = newSpecialtyId;
+            Specialty result = Specialty.GetSpecialty(newSpecialtyId);
+            Assert.AreEqual(expected, result);
+        }
+
+       public void GetAll_ReturnsAllSpecialtiesFromDataBase_List()
+        {
+            List<Specialty> specialties = new List<Specialty>{};
+            List<Specialty> result = Specialty.GetAll();
+            CollectionAssert.AreEqual(specialties, result);
+        }
 
         // [TestMethod]
         // public void DeleteClient_RemoveClientFromDB_List()
