@@ -3,7 +3,13 @@
     ViewData["Page"] = @Model.FirstName + "'s Page";
 }
 <div>
+    <div class="clientHead">
     <h3>@Model.FirstName @Model.LastName</h3>
+    <form asp-controller="stylist" asp-action="destroy">
+        <input type="hidden" name="stylistId" value= @Model.Id>
+        <button type="submit">Delete Stylist</button>
+    </form>
+    </div>
 
     @if(ViewBag.Clients.Count != 0)
     {

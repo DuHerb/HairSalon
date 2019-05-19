@@ -32,7 +32,14 @@ namespace HairSalon.Controllers
         public IActionResult Show(int clientId)
         {
             Client client = Client.GetClient(clientId);
-            ViewBag.Stylist = Stylist.GetStylist(client.StylistId);
+            if(client.StylistId != 0)
+            {
+                ViewBag.Stylist = Stylist.GetStylist(client.StylistId);
+            }
+            else
+            {
+                ViewBag.AllStylists = Stylist.GetAll();
+            }
             return View(client);
         }
 
@@ -46,6 +53,12 @@ namespace HairSalon.Controllers
         {
             Client.ClearAllClients();
             return RedirectToAction("Index");
+        }
+
+        public IActionResult UpdateStylist(int stylistId, int clientId)
+        {
+            Client.GetClient(clientId).UpdateStylistId(stylistId);
+            return RedirectToAction("Show", new {clientId = clientId});
         }
     }
 }

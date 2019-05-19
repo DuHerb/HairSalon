@@ -150,5 +150,16 @@ namespace HairSalon.TestTools
             string result = Client.GetClient(newClientId).FirstName + Client.GetClient(newClientId).LastName + Client.GetClient(newClientId).Phone;
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void UpdateStylistId_UpdateStylistIdInDB_Client()
+        {
+            int newClientId = Client.CreateClient(1,"mike","beard");
+            Client.GetClient(newClientId).ResetStylistId();
+            Client.GetClient(newClientId).UpdateStylistId(2);
+            int expected = 2;
+            int result = Client.GetClient(newClientId).StylistId;
+            Assert.AreEqual(expected, result);
+        }
     }
 }
