@@ -1,0 +1,15 @@
+<!-- specialty/index.cshtml -->
+@{
+    ViewData["Page"] = "All Specialties";
+}
+
+<div >
+<h2>Click Specialty to see all Stylists who can perform service:</h2>
+
+      @foreach(Specialty specialty in Model)
+      {
+        <p><a asp-controller="specialty" asp-action="show" asp-route-specialtyId="@specialty.Id">@specialty.Name</a></p>
+      }
+</div>
+
+<button><a asp-controller="specialty" asp-action="new">Create New Specialty</a></button>
