@@ -49,20 +49,13 @@ namespace HairSalon.TestTools
             Assert.AreEqual(id, result);
         }
 
-        //CreateStylist() is the 'save' method for client.  It returns
-        //the primary id assigned to newClient.
-        // [TestMethod]
-        // public void CreateStylist_SavesStylistToDatabase_Stylist()
-        // {
-        //     int stylist_id = 3;
-        //     string firstName = "mike";
-        //     string lastName = "beard";
-        //     int testClient = Client.CreateClient(stylist_id, firstName, lastName);
-        //     // Client.CreateClient(stylist_id, firstName, lastName);
-        //     int result = Client.GetClient(testClient).Id;
-        //     // List<Client> testList = new List<Client> {testClient};
-        //     Assert.AreEqual(testClient, result);
-        // }
+        [TestMethod]
+        public void CreateSpecialty_SavesSpecialtyToDatabase_Specialty()
+        {
+            int newSpeciatlyId = Specialty.CreateSpecialty("test");
+            int result = Specialty.GetSpecialty(newSpeciatlyId).Id;
+            Assert.AreEqual(newSpeciatlyId, result);
+        }
 
         // [TestMethod]
         // public void GetClient_ReturnClientById_Client()

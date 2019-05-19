@@ -76,38 +76,32 @@ namespace HairSalon.Models
         //     return clients;
         // }
 
-        // public static Client GetClient(int id)
-        // {
-        //     MySqlConnection conn = DB.Connection();
-        //     conn.Open();
-        //     var cmd = conn.CreateCommand() as MySqlCommand;
-        //     cmd.CommandText = @"SELECT * FROM clients WHERE id = @id";
-        //     cmd.Parameters.AddWithValue("@id", id);
-        //     MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-        //     rdr.Read();
-        //     Client foundClient = new Client(rdr.GetInt32(1));
-        //     foundClient.Id = rdr.GetInt32(0);
-        //     foundClient.FirstName = rdr.GetString(2);
-        //     foundClient.LastName = rdr.GetString(3);
-        //     foundClient.Phone = rdr.GetString(4);
-        //     DB.Close(conn);
-        //     return foundClient;
-        // }
+        public static Specialty GetSpecialty(int id)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT * FROM specialties WHERE id = @id";
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            rdr.Read();
+            Specialty foundSpecialty = new Specialty(rdr.GetString(1));
+            foundSpecialty.Id = rdr.GetInt32(0);
+            DB.Close(conn);
+            return foundSpecialty;
+        }
 
-        // public static int CreateClient(int stylistId, string firstName, string lastName)
-        // {
-        //     MySqlConnection conn = DB.Connection();
-        //     conn.Open();
-        //     var cmd = conn.CreateCommand() as MySqlCommand;
-        //     cmd.CommandText = @"INSERT INTO clients (stylist_Id, first_name, last_Name) VALUES (@stylistId, @firstName, @lastName);";
-        //     MySqlParameter description = new MySqlParameter();
-        //     cmd.Parameters.AddWithValue("@stylistId", stylistId);
-        //     cmd.Parameters.AddWithValue("@firstName", firstName);
-        //     cmd.Parameters.AddWithValue("@lastName", lastName);
-        //     cmd.ExecuteNonQuery();
-        //     DB.Close(conn);
-        //     return (int) cmd.LastInsertedId;
-        // }
+        public static int CreateSpecialty(string name)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO specialties (name) VALUES (@name);";
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.ExecuteNonQuery();
+            DB.Close(conn);
+            return (int) cmd.LastInsertedId;
+        }
 
         // public void DeleteClient()
         // {
