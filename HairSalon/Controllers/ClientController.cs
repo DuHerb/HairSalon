@@ -35,5 +35,11 @@ namespace HairSalon.Controllers
             ViewBag.Stylist = Stylist.GetStylist(client.StylistId);
             return View(client);
         }
+
+        public IActionResult Destroy(int clientId)
+        {
+            Client.GetClient(clientId).DeleteClient();
+            return RedirectToAction("Index");
+        }
     }
 }

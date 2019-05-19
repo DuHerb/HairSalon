@@ -10,6 +10,11 @@ img {
     list-style: none;
 }
 
+.clientHead {
+    display: flex;
+    justify-content: space-between;
+}
+
 .main-actions {
     margin: 20px;
     text-align: center;
