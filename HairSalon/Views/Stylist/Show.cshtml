@@ -1,26 +1,49 @@
 <!-- stylist/show.cshtml -->
 @{
-    ViewData["Page"] = @Model.FirstName + "'s Page";
+    ViewData["Page"] = @Model["stylist"].FirstName + "'s Page";
 }
 <div>
     <div class="pageHead">
-        <h3>@Model.FirstName @Model.LastName</h3>
+        <div>
+            <h3>@Model["stylist"].FirstName @Model["stylist"].LastName</h3>
+            <form asp-controller="stylist" asp-action="updateSpecialty" method="post">
+                <input type="hidden" name="stylistId" value=@Model["stylist"].Id>
+                <select name="specialtyId">
+                    @foreach(Specialty specialty in Model["allSpecialties"])
+                    {
+                        <option value=@specialty.Id>@specialty.Name</option>
+                    }
+                </select>
+                <button class="btn btn-dark" type="submit">Add Specialty</button>
+            </form>
+        </div>
         <div class="editButtons">
-            <a class="btn btn-dark" href="/stylist/show/@Model.Id/edit">Edit Stylist</a>
+            <a class="btn btn-dark" href="/stylist/show/@Model["stylist"].Id/edit">Edit Stylist</a>
             <form asp-controller="stylist" asp-action="destroy">
-                <input type="hidden" name="stylistId" value= @Model.Id>
+                <input type="hidden" name="stylistId" value= @Model["stylist"].Id>
                 <button class="btn btn-danger" type="submit">Delete Stylist</button>
             </form>
         </div>
     </div>
 
-    @if(ViewBag.Clients.Count != 0)
+    @if(Model["specialties"].Count !=0)
+    {
+        <p>Specialties: </p>
+        <ul class="specialtyList">
+            @foreach(Specialty specialty in Model["specialties"])
+            {
+                <li><a asp-controller="specialty" asp-action="show" asp-route-id=@specialty.Id>@specialty.Name</a></li>
+            }
+        </ul>
+    }
+
+    @if(Model["clients"].Count != 0)
     {
         <p>Client List:</p>
         <ul class="client-list">
-        @foreach(Client client in @ViewBag.Clients)
+        @foreach(Client client in @Model["clients"])
         {
-            <li><a asp-controller="client" asp-action="show" asp-route-clientId=@Html.Raw(@client.Id)>@client.FirstName @client.LastName</a></li>
+            <li><a asp-controller="client" asp-action="show" asp-route-clientId=@client.Id>@client.FirstName @client.LastName</a></li>
         }
         </ul>
     }
@@ -35,6 +58,6 @@
         <a class="nav-link text-dark" asp-area="" asp-controller="Stylist" asp-action="Index">Stylists</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark new-stylist" asp-controller="Client" asp-action="New" asp-route-id=@Html.Raw(ViewBag.Id) >Add New Client</a>
+        <a class="nav-link text-dark new-stylist" asp-controller="Client" asp-action="New" asp-route-id=@Model["stylist"].Id >Add New Client</a>
     </li>
 }

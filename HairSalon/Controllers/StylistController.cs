@@ -30,11 +30,12 @@ namespace HairSalon.Controllers
         [HttpGet("/stylist/show/{id}")]
         public IActionResult Show(int id)
         {
-            List<Client> clients = new List<Client>{};
-            clients = Client.GetAllByStylist(id);
-            ViewBag.Id = id;
-            ViewBag.Clients = clients;
-            return View(Stylist.GetStylist(id));
+            Dictionary<string, object> model = new Dictionary<string, object>{};
+            model.Add("clients", Client.GetAllByStylist(id));
+            model.Add("stylist", Stylist.GetStylist(id));
+            model.Add("specialties", Specialty.GetAllByStylist(id));
+            model.Add("allSpecialties", Specialty.GetAll());
+            return View(model);
         }
 
         [HttpGet("/stylist/show/{id}/edit")]
@@ -48,6 +49,12 @@ namespace HairSalon.Controllers
         {
             Stylist.GetStylist(id).EditName(firstName, lastName);
             return RedirectToAction("Show", new {id = id});
+        }
+
+        public IActionResult UpdateSpecialty(int specialtyId, int stylistId)
+        {
+            Specialty.AddStylist(stylistId, specialtyId);
+            return RedirectToAction ("Show", new {id = stylistId});
         }
 
         public IActionResult Destroy(int stylistId)

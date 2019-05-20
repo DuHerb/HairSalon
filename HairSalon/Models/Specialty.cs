@@ -62,13 +62,14 @@ namespace HairSalon.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM specialties WHERE stylist_id = @stylistId;";
+            cmd.CommandText = @"SELECT DISTINCT specialties.* FROM stylists JOIN specialties_stylists ON (stylists.id = specialties_stylists.stylist_id) JOIN specialties ON (specialties_stylists.specialty_id = specialties.id) WHERE stylist_id = @stylistId;";
             cmd.Parameters.AddWithValue("@stylistId", stylistId);
             MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
             while(rdr.Read())
             {
                 Specialty newSpecialty = new Specialty(rdr.GetString(1));
                 newSpecialty.Id = rdr.GetInt32(0);
+                specialties.Add(newSpecialty);
             }
             DB.Close(conn);
             return specialties;

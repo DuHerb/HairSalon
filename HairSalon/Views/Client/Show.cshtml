@@ -26,14 +26,13 @@
         {
             <form asp-asp-controller="client" asp-action="UpdateStylist">
                 <input type="hidden" name="clientId" value= @Model.Id>
-                <label for="stylistId">Assign a to Stylist</label>
                 <select name="stylistId" required>
                     @foreach(Stylist stylist in ViewBag.AllStylists)
                     {
                         <option value=@stylist.Id>@stylist.FirstName @stylist.LastName</option>
                     }
                 </select>
-                <button type="submit">Assign Stylist</button>
+                <button class="btn btn-dark" type="submit">Assign Stylist</button>
             </form>
         }
     </p>

@@ -14,6 +14,11 @@ input {
     list-style: none;
 }
 
+.specialtyList {
+    padding-left: 0;
+    list-style: none;
+}
+
 .pageHead {
     display: flex;
     justify-content: space-between;
