@@ -1,0 +1,27 @@
+<!-- specialty/show.cshtml -->
+@{
+    ViewData["Page"] = "Specialty";
+}
+
+<div >
+  <div class="pageHead">
+    <h2>@Model["specialty"].Name</h2>
+    <div class="editButtons">
+            <form asp-controller="specialty" asp-action="AddStylist" method="post">
+                <input type="hidden" name="specialtyId" value=@Model["specialty"].Id>
+                <select name="stylistId">
+                    @foreach(Stylist stylist in Model["allStylists"])
+                    {
+                        <option value=@stylist.Id>@stylist.FirstName @stylist.LastName</option>
+                    }
+                </select>
+                <button class="btn btn-dark" type="submit">Add Stylist</button>
+            </form>
+        </div>
+  </div>
+    <p>Stylist List: </p>
+    @foreach(Stylist stylist in Model["selectedStylists"])
+    {
+        <p><a asp-controller="stylist" asp-action="Show" asp-route-id="@stylist.Id">@stylist.FirstName @stylist.LastName</a></p>
+    }
+</div>

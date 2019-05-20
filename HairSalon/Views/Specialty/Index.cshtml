@@ -4,12 +4,13 @@
 }
 
 <div >
-<h2>Click Specialty to see all Stylists who can perform service:</h2>
+  <div class="pageHead">
+    <h2>Stylist Specialties:</h2>
+    <a class="btn btn-dark" asp-controller="specialty" asp-action="new">Create New Specialty</a>
+  </div>
 
       @foreach(Specialty specialty in Model)
       {
-        <p><a asp-controller="specialty" asp-action="show" asp-route-specialtyId="@specialty.Id">@specialty.Name</a></p>
+        <p><a asp-controller="specialty" asp-action="show" asp-route-id=@specialty.Id>@specialty.Name</a></p>
       }
 </div>
-
-<button><a asp-controller="specialty" asp-action="new">Create New Specialty</a></button>

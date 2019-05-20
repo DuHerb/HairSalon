@@ -19,16 +19,16 @@ input {
     justify-content: space-between;
 }
 
+.pageHead a {
+    height: fit-content;
+}
+
 .editButtons {
     display: flex;
 }
 
 .editButtons .btn {
     margin: 5px;
-}
-
-.editButtons a {
-    height: fit-content;
 }
 
 .main-actions {

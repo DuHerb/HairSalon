@@ -49,6 +49,7 @@ namespace HairSalon.Models
             while(rdr.Read())
             {
                 Specialty newSpecialty = new Specialty(rdr.GetString(1));
+                newSpecialty.Id = rdr.GetInt32(0);
                 specialties.Add(newSpecialty);
             }
             DB.Close(conn);
@@ -107,6 +108,18 @@ namespace HairSalon.Models
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = @"DELETE FROM specialties WHERE Id = @specialtyId;";
             cmd.Parameters.AddWithValue("@specialtyId", Id);
+            cmd.ExecuteNonQuery();
+            DB.Close(conn);
+        }
+
+        public static void AddStylist(int stylistId, int specialtyId)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO specialties_stylists (specialty_id, stylist_id) VALUES (@specialtyId, @stylistId);";
+            cmd.Parameters.AddWithValue("@specialtyId", specialtyId);
+            cmd.Parameters.AddWithValue("@stylistId", stylistId);
             cmd.ExecuteNonQuery();
             DB.Close(conn);
         }
