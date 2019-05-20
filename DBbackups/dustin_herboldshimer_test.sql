@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 18, 2019 at 09:51 PM
+-- Generation Time: May 20, 2019 at 12:21 AM
 -- Server version: 5.7.25
 -- PHP Version: 7.1.26
 
@@ -33,9 +33,9 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`id`, `stylist_id`, `first_name`, `last_name`, `phone`) VALUES
-(472, 1, 'mike', 'beard', 'none'),
-(473, 1, 'mike', 'beard', 'none'),
-(474, 371, 'mike', 'beard', 'none');
+(538, 1, 'mike', 'beard', 'none'),
+(539, 1, 'mike', 'beard', 'none'),
+(540, 413, 'mike', 'beard', 'none');
 
 -- --------------------------------------------------------
 
@@ -77,10 +77,10 @@ CREATE TABLE `stylists` (
 --
 
 INSERT INTO `stylists` (`id`, `first_name`, `last_name`) VALUES
-(371, 'firstName', 'lastName'),
-(372, 'mike', 'beard'),
-(373, 'mike', 'beard'),
-(374, 'mike', 'beard');
+(413, 'firstName', 'lastName'),
+(414, 'mike', 'beard'),
+(415, 'mike', 'beard'),
+(416, 'mike', 'beard');
 
 --
 -- Indexes for dumped tables
@@ -118,13 +118,13 @@ ALTER TABLE `stylists`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=475;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=541;
 
 --
 -- AUTO_INCREMENT for table `specialties`
 --
 ALTER TABLE `specialties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `specialties_stylists`
@@ -136,4 +136,4 @@ ALTER TABLE `specialties_stylists`
 -- AUTO_INCREMENT for table `stylists`
 --
 ALTER TABLE `stylists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=375;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=417;
