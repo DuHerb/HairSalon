@@ -1,0 +1,14 @@
+<!-- specialty/new.cshtml -->
+@{
+  ViewData["Page"] = "New Specialty";
+}
+<p>Enter New Specialty Information:</p>
+
+<form asp-controller="specialty" asp-action="Create" method="post">
+  <div class="">
+    <label for="name">Name/Description</label>
+    <input type="text" name="name" required>
+  </div>
+
+  <button class="btn btn-dark" type="submit">Save Specialty</button>
+</form>

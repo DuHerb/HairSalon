@@ -15,6 +15,21 @@ namespace HairSalon.Models
             LastName = lastName;
         }
 
+       public override bool Equals(System.Object otherItem)
+        {
+            if (!(otherItem is Stylist))
+            {
+                return false;
+            }
+            else
+            {
+                Stylist newStylist = (Stylist) otherItem;
+                bool nameEquality = (this.FirstName == newStylist.FirstName && this.LastName == newStylist.LastName);
+                bool idEquality = (this.Id == newStylist.Id);
+                return (nameEquality && idEquality);
+            }
+        }
+
         public static void ClearAllStylists()
         {
             MySqlConnection conn = DB.Connection();
@@ -77,19 +92,52 @@ namespace HairSalon.Models
             return (int) cmd.LastInsertedId;
         }
 
-        public override bool Equals(System.Object otherItem)
+        public void DeleteStylist()
         {
-            if (!(otherItem is Stylist))
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM stylists WHERE id = @stylistId;";
+            MySqlParameter description = new MySqlParameter();
+            cmd.Parameters.AddWithValue("@stylistId", this.Id);
+            cmd.ExecuteNonQuery();
+            DB.Close(conn);
+            Client.ResetAllByStylistId(this.Id);
+        }
+
+        public void EditName(string firstName, string lastName)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"UPDATE stylists SET first_name = @firstName, last_name = @lastName WHERE id = @stylistId;";
+            MySqlParameter description = new MySqlParameter();
+            cmd.Parameters.AddWithValue("@stylistId", Id);
+            cmd.Parameters.AddWithValue("@firstName", firstName);
+            cmd.Parameters.AddWithValue("@lastName", lastName);
+            cmd.ExecuteNonQuery();
+            DB.Close(conn);
+        }
+
+        public static List<Stylist> GetAllBySpecialty(int specialtyId)
+        {
+            List<Stylist> stylists = new List<Stylist>{};
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"SELECT DISTINCT stylists.* FROM specialties JOIN specialties_stylists ON (specialties.id = specialties_stylists.specialty_id) JOIN stylists ON (specialties_stylists.stylist_id = stylists.id) WHERE specialty_id = @specialtyId;";
+            cmd.Parameters.AddWithValue("@specialtyId", specialtyId);
+            MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+            while(rdr.Read())
             {
-                return false;
+                Stylist newStylist = new Stylist();
+                newStylist.Id = rdr.GetInt32(0);
+                newStylist.FirstName = rdr.GetString(1);
+                newStylist.LastName = rdr.GetString(2);
+                stylists.Add(newStylist);
             }
-            else
-            {
-                Stylist newStylist = (Stylist) otherItem;
-                bool nameEquality = (this.FirstName == newStylist.FirstName && this.LastName == newStylist.LastName);
-                bool idEquality = (this.Id == newStylist.Id);
-                return (nameEquality && idEquality);
-            }
+            DB.Close(conn);
+            return stylists;
         }
     }
 }

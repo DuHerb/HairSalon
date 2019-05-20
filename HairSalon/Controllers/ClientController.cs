@@ -32,8 +32,46 @@ namespace HairSalon.Controllers
         public IActionResult Show(int clientId)
         {
             Client client = Client.GetClient(clientId);
-            ViewBag.Stylist = Stylist.GetStylist(client.StylistId);
+            if(client.StylistId != 0)
+            {
+                ViewBag.Stylist = Stylist.GetStylist(client.StylistId);
+            }
+            else
+            {
+                ViewBag.AllStylists = Stylist.GetAll();
+            }
             return View(client);
+        }
+
+        public IActionResult Destroy(int clientId)
+        {
+            Client.GetClient(clientId).DeleteClient();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult DestroyAll()
+        {
+            Client.ClearAllClients();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult UpdateStylist(int stylistId, int clientId)
+        {
+            Client.GetClient(clientId).UpdateStylistId(stylistId);
+            return RedirectToAction("Show", new {clientId = clientId});
+        }
+
+        [HttpGet("/client/show/{id}/edit")]
+        public IActionResult Edit(int id)
+        {
+            Client client = Client.GetClient(id);
+            return View(client);
+        }
+
+        public IActionResult Update(string firstName, string lastName, string phone, int clientId)
+        {
+            Client.GetClient(clientId).EditClientInfo(firstName, lastName, phone);
+            return RedirectToAction("Show", new{clientId = clientId});
         }
     }
 }

@@ -3,10 +3,38 @@
     ViewData["Page"] = "Client Page";
 }
 <div>
-    <h3>@Model.FirstName @Model.LastName</h3>
+    <div class="pageHead">
+        <div class="pageHead-name">
+            <h3>@Model.FirstName @Model.LastName</h3>
+            <p>Phone: @Model.Phone</p>
+        </div>
+        <div class="editButtons">
+            <a class="btn btn-dark" href="/client/show/@Model.Id/edit">Edit Client</a>
+            <form asp-controller="client" asp-action="destroy">
+                <input type="hidden" name="clientId" value= @Model.Id>
+                <button class="btn btn-danger" type="submit">Delete Client</button>
+            </form>
+        </div>
+    </div>
 
-    <p>Stylist:  
-        <a asp-controller="stylist" asp-action="show" asp-route-id=@Html.Raw(ViewBag.Stylist.Id)>@ViewBag.Stylist.FirstName @ViewBag.Stylist.LastName</a>
+    <p>Stylist:
+        @if(Model.StylistId != 0)
+        {
+            <a asp-controller="stylist" asp-action="show" asp-route-id=@Html.Raw(ViewBag.Stylist.Id)>@ViewBag.Stylist.FirstName @ViewBag.Stylist.LastName</a>
+        }
+        else
+        {
+            <form asp-asp-controller="client" asp-action="UpdateStylist">
+                <input type="hidden" name="clientId" value= @Model.Id>
+                <select name="stylistId" required>
+                    @foreach(Stylist stylist in ViewBag.AllStylists)
+                    {
+                        <option value=@stylist.Id>@stylist.FirstName @stylist.LastName</option>
+                    }
+                </select>
+                <button class="btn btn-dark" type="submit">Assign Stylist</button>
+            </form>
+        }
     </p>
 </div>
 

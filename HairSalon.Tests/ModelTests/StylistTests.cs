@@ -68,16 +68,38 @@ namespace HairSalon.TestTools
             List<Stylist> result = Stylist.GetAll();
             CollectionAssert.AreEqual(stylists, result);
         }
-        // [TestMethod]
+        [TestMethod]
         public void CreateStylist_SavesStylistToDatabase_Stylist()
         {
             string firstName = "mike";
             string lastName = "beard";
             Stylist testStylist = new Stylist();
-            Stylist.CreateStylist(firstName, lastName);
+            int stylistId = Stylist.CreateStylist(firstName, lastName);
             List<Stylist> result = Stylist.GetAll();
-            List<Stylist> testList = new List<Stylist> {testStylist};
+            List<Stylist> testList = new List<Stylist> {Stylist.GetStylist(stylistId)};
             CollectionAssert.AreEqual(testList, result);
+        }
+
+        [TestMethod]
+        public void DeleteStylist_RemoveStylistFromDataBase_True()
+        {
+            int newStylistId = Stylist.CreateStylist("mike","beard");
+            List<Stylist> expected = new List<Stylist>{};
+            Stylist.GetStylist(newStylistId).DeleteStylist();
+            List<Stylist> result = Stylist.GetAll();
+            CollectionAssert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void EditName_ChangeStylistsName_Void()
+        {
+            int newStylistId = Stylist.CreateStylist("mike","beard");
+            string newFirstName = "pam";
+            string newLastName = "whiskers";
+            Stylist.GetStylist(newStylistId).EditName(newFirstName, newLastName);
+            string expected = newFirstName + newLastName;
+            string result = Stylist.GetStylist(newStylistId).FirstName + Stylist.GetStylist(newStylistId).LastName;
+            Assert.AreEqual(expected,result);
         }
     }
 }

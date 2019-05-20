@@ -5,9 +5,35 @@ img {
     width: 200px;
 }
 
+input {
+    background: lightgray;
+}
+
 .client-list {
     padding-left: 0;
     list-style: none;
+}
+
+.specialtyList {
+    padding-left: 0;
+    list-style: none;
+}
+
+.pageHead {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pageHead a {
+    height: fit-content;
+}
+
+.editButtons {
+    display: flex;
+}
+
+.editButtons .btn {
+    margin: 5px;
 }
 
 .main-actions {
